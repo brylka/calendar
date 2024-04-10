@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// dane startowe
-	month = 9;
+	month = 2;
 	year = 2024;
 	
 	startDay = new Date(year, month - 1, 1).getDay(); // .getDay() zwraca indexy dni tygodnia 0-6, gdzie 0 to niedziela, 1 poniedziałek, 6 sobota
@@ -14,11 +14,25 @@ $(document).ready(function() {
 	// tablica z dniami tygodnia
 	var dayName = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
 	
+	// tablica z nazwami miesięcy
+	var monthName = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+	
+	// wyświetlanie nazwy miesiąca i roku oraz elementów nawigacyjnych
+	divDay = $('<div>').text("<");
+	$("#calendar").append(divDay);
+	divDay = $('<div>').text(monthName[month-1] + " " + year);
+	divDay.addClass('month-year');
+	$("#calendar").append(divDay);
+	divDay = $('<div>').text(">");
+	$("#calendar").append(divDay);
+		
+	
 	// wyświetlenie dni tygodnia
 	for (let i = 0; i <= 6; i++) {
 		//$("#calendar").append('<div class="day-name' + (i == 5 ? ' saturday' : i == 6 ? ' sunday' : '') + '">' + dayName[i] + '</div>');
 		divDay = $('<div>').text(dayName[i]);
 		divDay.addClass('day-name');
+		if (i == 0) { divDay.addClass('clear'); }
 		if (i == 5) { divDay.addClass('saturday'); }
 		if (i == 6) { divDay.addClass('sunday'); }
 		$("#calendar").append(divDay);
