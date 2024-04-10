@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	// dane startowe
+	startDay = 7 // numer dnia tygodnia 1-7, gdzie 1 - poniedziałek, 7 - niedziela
+	maxDay = 30 // ilośc dni w miesiącu
+
 	// tablica z dniami tygodnia
 	var dayName = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
 	
@@ -12,17 +16,26 @@ $(document).ready(function() {
 		$("#calendar").append(divDay);
 	}
 	
+	// wyświetlenie pustych dni
+	for (let i = 1; i < startDay; i++) {
+		divDay = $('<div>');
+		divDay.addClass('none');
+		if (i == 1) { divDay.addClass('clear'); }
+		$("#calendar").append(divDay);
+	}
+	
+	
 	// wyświetlenie kalendarza
-	for (let i = 1; i <= 31; i++) {
+	for (let i = 1; i <= maxDay; i++) {
 		// wyświetlanie dni miesiąca
 		//$("#calendar").append('<div class="' +
 		//((i % 7 == 1) ? 'clear' : (i % 7 == 0) ? 'sunday' : (i % 7 == 6) ? 'saturday' : '') + 
 		//'">' + i + '</div>')
+		ii = i + startDay - 1
 		divDay = $('<div>').text(i);
-		if (i % 7 == 1) { divDay.addClass('clear'); }
-		if (i % 7 == 0) { divDay.addClass('sunday'); }
-		if (i % 7 == 6) { divDay.addClass('saturday'); }
+		if (ii % 7 == 1) { divDay.addClass('clear'); }
+		if (ii % 7 == 0) { divDay.addClass('sunday'); }
+		if (ii % 7 == 6) { divDay.addClass('saturday'); }
 		$("#calendar").append(divDay);
-		
 	}
 })
