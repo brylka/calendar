@@ -1,7 +1,15 @@
 $(document).ready(function() {
 	// dane startowe
-	startDay = 7 // numer dnia tygodnia 1-7, gdzie 1 - poniedziałek, 7 - niedziela
-	maxDay = 30 // ilośc dni w miesiącu
+	month = 9;
+	year = 2024;
+	
+	startDay = new Date(year, month - 1, 1).getDay(); // .getDay() zwraca indexy dni tygodnia 0-6, gdzie 0 to niedziela, 1 poniedziałek, 6 sobota
+	if (startDay == 0) { startDay = 7; } // zamiana numeru dla niedzieli
+	maxDay = new Date(year, month, 0).getDate(); // pobranie maksymalnego dnia w miesiącu
+	//console.log("startDay: " + startDay + ",maxDay: " + maxDay)
+	
+	//startDay = 7 // numer dnia tygodnia 1-7, gdzie 1 - poniedziałek, 7 - niedziela
+	//maxDay = 30 // ilośc dni w miesiącu
 
 	// tablica z dniami tygodnia
 	var dayName = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
