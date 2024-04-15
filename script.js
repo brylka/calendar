@@ -1,23 +1,19 @@
 $(document).ready(function() {
 	// dane startowe
-	date = new Date();
-	day = date.getDate(); // pobiera aktualny dzień miesiąca
-	month = date.getMonth() + 1; // getMonth() pobiera aktualny index miesiąca od 0 dla stycznia do 11 dla grudnia
-	year = date.getFullYear();
+	let date = new Date();
+	let day = date.getDate(); // getDate() pobiera aktualny dzień miesiąca
+	let month = date.getMonth() + 1; // getMonth() pobiera aktualny index miesiąca od 0 dla stycznia do 11 dla grudnia
+	let year = date.getFullYear(); // getFullFear() pobiera aktualny rok w formacie czterocyfrowym
 	
-	startDay = new Date(year, month - 1, 1).getDay(); // .getDay() zwraca indexy dni tygodnia 0-6, gdzie 0 to niedziela, 1 poniedziałek, 6 sobota
+	let startDay = new Date(year, month - 1, 1).getDay(); // .getDay() zwraca indexy dni tygodnia 0-6, gdzie 0 to niedziela, 1 poniedziałek, 6 sobota
 	if (startDay == 0) { startDay = 7; } // zamiana numeru dla niedzieli
-	maxDay = new Date(year, month, 0).getDate(); // pobranie maksymalnego dnia w miesiącu
-	//console.log("startDay: " + startDay + ",maxDay: " + maxDay)
-	
-	//startDay = 7 // numer dnia tygodnia 1-7, gdzie 1 - poniedziałek, 7 - niedziela
-	//maxDay = 30 // ilośc dni w miesiącu
+	let maxDay = new Date(year, month, 0).getDate(); // pobranie maksymalnego dnia w miesiącu
 
 	// tablica z dniami tygodnia
-	var dayName = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
+	let dayName = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
 	
 	// tablica z nazwami miesięcy
-	var monthName = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+	let monthName = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 	
 	// wyświetlanie nazwy miesiąca i roku oraz elementów nawigacyjnych
 	divDay = $('<div>').text("<");
@@ -31,7 +27,6 @@ $(document).ready(function() {
 	
 	// wyświetlenie dni tygodnia
 	for (let i = 0; i <= 6; i++) {
-		//$("#calendar").append('<div class="day-name' + (i == 5 ? ' saturday' : i == 6 ? ' sunday' : '') + '">' + dayName[i] + '</div>');
 		divDay = $('<div>').text(dayName[i]);
 		divDay.addClass('day-name');
 		if (i == 0) { divDay.addClass('clear'); }
@@ -52,14 +47,14 @@ $(document).ready(function() {
 	// wyświetlenie kalendarza
 	for (let i = 1; i <= maxDay; i++) {
 		// wyświetlanie dni miesiąca
-		//$("#calendar").append('<div class="' +
-		//((i % 7 == 1) ? 'clear' : (i % 7 == 0) ? 'sunday' : (i % 7 == 6) ? 'saturday' : '') + 
-		//'">' + i + '</div>')
-		ii = i + startDay - 1
+		let ii = i + startDay - 1
 		divDay = $('<div>').text(i);
+		if (i == day) { divDay.addClass('today'); } 
+		else {
+			if (ii % 7 == 0) { divDay.addClass('sunday'); }
+			if (ii % 7 == 6) { divDay.addClass('saturday'); }
+		}
 		if (ii % 7 == 1) { divDay.addClass('clear'); }
-		if (ii % 7 == 0) { divDay.addClass('sunday'); }
-		if (ii % 7 == 6) { divDay.addClass('saturday'); }
 		$("#calendar").append(divDay);
 	}
 })
