@@ -1,7 +1,9 @@
 $(document).ready(function() {
 	// dane startowe
-	month = 2;
-	year = 2024;
+	date = new Date();
+	day = date.getDate(); // pobiera aktualny dzień miesiąca
+	month = date.getMonth() + 1; // getMonth() pobiera aktualny index miesiąca od 0 dla stycznia do 11 dla grudnia
+	year = date.getFullYear();
 	
 	startDay = new Date(year, month - 1, 1).getDay(); // .getDay() zwraca indexy dni tygodnia 0-6, gdzie 0 to niedziela, 1 poniedziałek, 6 sobota
 	if (startDay == 0) { startDay = 7; } // zamiana numeru dla niedzieli
