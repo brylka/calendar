@@ -55,7 +55,6 @@ $(document).ready(function() {
 		for (let i = 0; i <= 6; i++) {
 			divDay = $('<div>').text(dayName[i]);
 			divDay.addClass('day-name');
-			if (i == 0) { divDay.addClass('clear'); }
 			if (i == 5) { divDay.addClass('saturday'); }
 			if (i == 6) { divDay.addClass('sunday'); }
 			$("#calendar").append(divDay);
@@ -65,7 +64,6 @@ $(document).ready(function() {
 		for (let i = 1; i < startDay; i++) {
 			divDay = $('<div>');
 			divDay.addClass('none');
-			if (i == 1) { divDay.addClass('clear'); }
 			$("#calendar").append(divDay);
 		}
 		
@@ -79,7 +77,6 @@ $(document).ready(function() {
 				if (ii % 7 == 0) { divDay.addClass('sunday'); }
 				if (ii % 7 == 6) { divDay.addClass('saturday'); }
 			}
-			if (ii % 7 == 1) { divDay.addClass('clear'); }
 			$("#calendar").append(divDay);
 		}
 	}

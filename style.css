@@ -1,11 +1,14 @@
+#calendar {
+	display: grid;
+	grid-template-columns: repeat(7, 50px);
+	grid-gap: 10px;
+}
+
 #calendar div {
-	width: 50px;
 	height: 50px;
-	margin: 5px;
 	text-align: center;
 	line-height: 50px;
 	background-color: lightgrey;
-	float: left;
 }
 
 #calendar .day-name {
@@ -29,7 +32,7 @@
 }
 
 #calendar .month-year {
-	width: 290px;
+	grid-column: span 5;
 }
 
 #calendar .none {
@@ -38,8 +41,4 @@
 
 #calendar .click-right, .click-left {
 	user-select: none;
-}
-
-.clear {
-	clear: both;
 }
