@@ -71,7 +71,7 @@ $(document).ready(function() {
 			// wyświetlanie dni miesiąca
 			let ii = i + startDay - 1
 			divDay = $('<div>').text(i);
-			if (i == day) { divDay.addClass('today'); } 
+			if (i == date.getDate() && month == date.getMonth() + 1 && year == date.getFullYear()) { divDay.addClass('today'); } 
 			else {
 				if (ii % 7 == 0) { divDay.addClass('sunday'); }
 				if (ii % 7 == 6) { divDay.addClass('saturday'); }
