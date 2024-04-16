@@ -36,6 +36,10 @@
 	background-color: white;
 }
 
+#calendar .click-right, .click-left {
+	user-select: none;
+}
+
 .clear {
 	clear: both;
 }

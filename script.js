@@ -1,9 +1,12 @@
 $(document).ready(function() {
 	// dane startowe
 	let date = new Date();
-	let day = date.getDate(); // getDate() pobiera aktualny dzień miesiąca
-	let month = date.getMonth() + 1; // getMonth() pobiera aktualny index miesiąca od 0 dla stycznia do 11 dla grudnia
-	let year = date.getFullYear(); // getFullFear() pobiera aktualny rok w formacie czterocyfrowym
+	const dayCurrent = date.getDate(); // getDate() pobiera aktualny dzień miesiąca
+	const monthCurrent = date.getMonth() + 1; // getMonth() pobiera aktualny index miesiąca od 0 dla stycznia do 11 dla grudnia
+	const yearCurrent = date.getFullYear(); // getFullFear() pobiera aktualny rok w formacie czterocyfrowym
+	let month = monthCurrent;
+	let year = yearCurrent;
+	
 	
 	// tablica z dniami tygodnia
 	let dayName = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
@@ -71,7 +74,7 @@ $(document).ready(function() {
 			// wyświetlanie dni miesiąca
 			let ii = i + startDay - 1
 			divDay = $('<div>').text(i);
-			if (i == date.getDate() && month == date.getMonth() + 1 && year == date.getFullYear()) { divDay.addClass('today'); } 
+			if (i == dayCurrent && month == monthCurrent && year == yearCurrent) { divDay.addClass('today'); } 
 			else {
 				if (ii % 7 == 0) { divDay.addClass('sunday'); }
 				if (ii % 7 == 6) { divDay.addClass('saturday'); }
