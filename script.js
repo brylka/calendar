@@ -13,6 +13,23 @@ $(document).ready(function() {
 
 	renderCalendar();
 
+	//$('.click-right').click(function() {
+	//$('.click-right').on('click', function() {
+	$(document).on('click', '.click-right', function() {
+		$("#calendar").html('');
+		month++;
+		if (month == 13) { month = 1; year++; }
+		renderCalendar();
+	});
+
+	$(document).on('click', '.click-left', function() {
+		$("#calendar").html('');
+		month--;
+		if (month == 0) { month = 12; year--; }
+		renderCalendar();
+	});
+
+
 	// funkcja generująca kalendarz
 	function renderCalendar() {
 		// pobieranie dnia startowego i ilości dni na podstawie miesiąca i roku
@@ -22,11 +39,13 @@ $(document).ready(function() {
 		
 		// wyświetlanie nazwy miesiąca i roku oraz elementów nawigacyjnych
 		divDay = $('<div>').text("<");
+		divDay.addClass('click-left');
 		$("#calendar").append(divDay);
 		divDay = $('<div>').text(monthName[month-1] + " " + year);
 		divDay.addClass('month-year');
 		$("#calendar").append(divDay);
 		divDay = $('<div>').text(">");
+		divDay.addClass('click-right');
 		$("#calendar").append(divDay);
 			
 		// wyświetlenie dni tygodnia
