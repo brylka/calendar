@@ -16,22 +16,27 @@ $(document).ready(function() {
 
 	renderCalendar();
 
-	//$('.click-right').click(function() {
-	//$('.click-right').on('click', function() {
-	$(document).on('click', '.click-right', function() {
-		$("#calendar").html('');
-		month++;
+	//$(document).on('click', '.click-right', function() {
+	//	$("#calendar").html('');
+	//	month++;
+	//	if (month == 13) { month = 1; year++; }
+	//	renderCalendar();
+	//});
+
+	//$(document).on('click', '.click-left', function() {
+	//	$("#calendar").html('');
+	//	month--;
+	//	if (month == 0) { month = 12; year--; }
+	//	renderCalendar();
+	//});
+
+	$(document).on('click', '.click-left, .click-right', function() {
+		if ($(this).hasClass('click-left')) { month--; } else { month++; }
 		if (month == 13) { month = 1; year++; }
-		renderCalendar();
-	});
-
-	$(document).on('click', '.click-left', function() {
-		$("#calendar").html('');
-		month--;
 		if (month == 0) { month = 12; year--; }
+		$("#calendar").html('');
 		renderCalendar();
 	});
-
 
 	// funkcja generująca kalendarz
 	function renderCalendar() {
@@ -41,20 +46,13 @@ $(document).ready(function() {
 		let maxDay = new Date(year, month, 0).getDate(); // pobranie maksymalnego dnia w miesiącu
 		
 		// wyświetlanie nazwy miesiąca i roku oraz elementów nawigacyjnych
-		divDay = $('<div>').text("<");
-		divDay.addClass('click-left');
-		$("#calendar").append(divDay);
-		divDay = $('<div>').text(monthName[month-1] + " " + year);
-		divDay.addClass('month-year');
-		$("#calendar").append(divDay);
-		divDay = $('<div>').text(">");
-		divDay.addClass('click-right');
-		$("#calendar").append(divDay);
+		$('<div>').text("<").addClass('click-left').appendTo("#calendar");
+		$('<div>').text(monthName[month-1] + " " + year).addClass('month-year').appendTo("#calendar");
+		$('<div>').text(">").addClass('click-right').appendTo("#calendar");
 			
 		// wyświetlenie dni tygodnia
 		for (let i = 0; i <= 6; i++) {
-			divDay = $('<div>').text(dayName[i]);
-			divDay.addClass('day-name');
+			divDay = $('<div>').text(dayName[i]).addClass('day-name');
 			if (i == 5) { divDay.addClass('saturday'); }
 			if (i == 6) { divDay.addClass('sunday'); }
 			$("#calendar").append(divDay);
@@ -62,8 +60,7 @@ $(document).ready(function() {
 		
 		// wyświetlenie pustych dni
 		for (let i = 1; i < startDay; i++) {
-			divDay = $('<div>');
-			divDay.addClass('none');
+			divDay = $('<div>').addClass('none');
 			$("#calendar").append(divDay);
 		}
 		
