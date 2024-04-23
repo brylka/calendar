@@ -27,7 +27,14 @@ $(document).ready(function() {
 	$(document).on('click', '.month-year', function() {
 		$('.month-year').hide();
 		$('.change-month-year').show();
-	})
+	});
+
+	$(document).on('click', '#btnSelectMonthYear', function() {
+		month = parseInt($('#month-select').val());
+		year = parseInt($('#year-select').val());
+		$("#calendar").html('');
+		renderCalendar();
+	});
 
 	// funkcja generująca kalendarz
 	function renderCalendar() {
@@ -39,18 +46,20 @@ $(document).ready(function() {
 		// wyświetlanie nazwy miesiąca i roku oraz elementów nawigacyjnych
 		$('<div>').text("<").addClass('click-left').appendTo("#calendar");
 		$('<div>').text(monthName[month-1] + " " + year).addClass('month-year').appendTo("#calendar");
-		let monthSelect = '<select>';
+		// stworzenie słownej listy miesięcy 
+		let monthSelect = '<select id="month-select">';
 		for (m=1; m<=12; m++) { 
-			monthSelect += '<option' + (m == month ? ' selected' : '') + '>' + monthName[m-1];
+			monthSelect += '<option value="' + m + '"' + (m == month ? ' selected' : '') + '>' + monthName[m-1];
 		}
 		monthSelect += '</select>';
-		let yearSelect = '<select>';
+		// stworzenie listy lat +-10
+		let yearSelect = '<select id="year-select">';
 		for (y=year-10; y<=year+10; y++) { 
-			yearSelect += '<option' + (y == year ? ' selected' : '') + '>' + y;
+			yearSelect += '<option value="' + y + '"' + (y == year ? ' selected' : '') + '>' + y;
 		}
 		yearSelect += '</select>';
 		
-		$('<div>').html(monthSelect + yearSelect + '<button>ustaw</button>').hide().addClass('change-month-year').appendTo("#calendar");
+		$('<div>').html(monthSelect + yearSelect + '<button id="btnSelectMonthYear">ustaw</button>').hide().addClass('change-month-year').appendTo("#calendar");
 		$('<div>').text(">").addClass('click-right').appendTo("#calendar");
 			
 		// wyświetlenie dni tygodnia
