@@ -31,7 +31,7 @@
 	background-color: lightblue;
 }
 
-#calendar .month-year {
+#calendar .month-year, .change-month-year {
 	grid-column: span 5;
 }
 

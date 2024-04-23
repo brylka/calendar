@@ -16,20 +16,6 @@ $(document).ready(function() {
 
 	renderCalendar();
 
-	//$(document).on('click', '.click-right', function() {
-	//	$("#calendar").html('');
-	//	month++;
-	//	if (month == 13) { month = 1; year++; }
-	//	renderCalendar();
-	//});
-
-	//$(document).on('click', '.click-left', function() {
-	//	$("#calendar").html('');
-	//	month--;
-	//	if (month == 0) { month = 12; year--; }
-	//	renderCalendar();
-	//});
-
 	$(document).on('click', '.click-left, .click-right', function() {
 		if ($(this).hasClass('click-left')) { month--; } else { month++; }
 		if (month == 13) { month = 1; year++; }
@@ -37,6 +23,11 @@ $(document).ready(function() {
 		$("#calendar").html('');
 		renderCalendar();
 	});
+	
+	$(document).on('click', '.month-year', function() {
+		$('.month-year').hide();
+		$('.change-month-year').show();
+	})
 
 	// funkcja generująca kalendarz
 	function renderCalendar() {
@@ -48,6 +39,18 @@ $(document).ready(function() {
 		// wyświetlanie nazwy miesiąca i roku oraz elementów nawigacyjnych
 		$('<div>').text("<").addClass('click-left').appendTo("#calendar");
 		$('<div>').text(monthName[month-1] + " " + year).addClass('month-year').appendTo("#calendar");
+		let monthSelect = '<select>';
+		for (m=1; m<=12; m++) { 
+			monthSelect += '<option' + (m == month ? ' selected' : '') + '>' + monthName[m-1];
+		}
+		monthSelect += '</select>';
+		let yearSelect = '<select>';
+		for (y=year-10; y<=year+10; y++) { 
+			yearSelect += '<option' + (y == year ? ' selected' : '') + '>' + y;
+		}
+		yearSelect += '</select>';
+		
+		$('<div>').html(monthSelect + yearSelect + '<button>ustaw</button>').hide().addClass('change-month-year').appendTo("#calendar");
 		$('<div>').text(">").addClass('click-right').appendTo("#calendar");
 			
 		// wyświetlenie dni tygodnia
