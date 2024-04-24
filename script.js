@@ -7,6 +7,7 @@ $(document).ready(function() {
 	let month = monthCurrent;
 	let year = yearCurrent;
 	
+	let textSelectMonthYear = "Ustaw";
 	
 	// tablica z dniami tygodnia
 	let dayName = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
@@ -20,7 +21,6 @@ $(document).ready(function() {
 		if ($(this).hasClass('click-left')) { month--; } else { month++; }
 		if (month == 13) { month = 1; year++; }
 		if (month == 0) { month = 12; year--; }
-		$("#calendar").html('');
 		renderCalendar();
 	});
 	
@@ -32,12 +32,33 @@ $(document).ready(function() {
 	$(document).on('click', '#btnSelectMonthYear', function() {
 		month = parseInt($('#month-select').val());
 		year = parseInt($('#year-select').val());
-		$("#calendar").html('');
+		renderCalendar();
+	});
+	
+	$(document).on('change', '#language-select', function() {
+		//alert(document.getElementById('language-select').value);
+		//alert($('#language-select').val());
+		//alert(this.value);
+		lang = this.value;
+		if (lang == "pl") {
+			textSelectMonthYear = "Ustaw";
+			dayName = ["Pon", "Wto", "Śro", "Czw", "Pią", "Sob", "Nie"];
+			monthName = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+		} else if (lang == "en") {
+			textSelectMonthYear = "Set";
+			dayName = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+			monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+		} else if (lang == "de") {
+			textSelectMonthYear = "Satz";
+			dayName = ["Mon", "Die", "Mit", "Don", "Fre", "Sam", "Son"];
+			monthName = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
+		}
 		renderCalendar();
 	});
 
 	// funkcja generująca kalendarz
 	function renderCalendar() {
+		$("#calendar").html('');
 		// pobieranie dnia startowego i ilości dni na podstawie miesiąca i roku
 		let startDay = new Date(year, month - 1, 1).getDay(); // .getDay() zwraca indexy dni tygodnia 0-6, gdzie 0 to niedziela, 1 poniedziałek, 6 sobota
 		if (startDay == 0) { startDay = 7; } // zamiana numeru dla niedzieli
@@ -59,7 +80,7 @@ $(document).ready(function() {
 		}
 		yearSelect += '</select>';
 		
-		$('<div>').html(monthSelect + yearSelect + '<button id="btnSelectMonthYear">ustaw</button>').hide().addClass('change-month-year').appendTo("#calendar");
+		$('<div>').html(monthSelect + yearSelect + '<button id="btnSelectMonthYear">' + textSelectMonthYear + '</button>').hide().addClass('change-month-year').appendTo("#calendar");
 		$('<div>').text(">").addClass('click-right').appendTo("#calendar");
 			
 		// wyświetlenie dni tygodnia
